@@ -2,7 +2,7 @@ pipeline {
 
 agent {
 			label{
-				label 'built-in'
+				label 'slave-1'
 				customWorkspace "/mnt/myproject"
 			}
 }
@@ -10,20 +10,18 @@ agent {
 stages{
 			stage ('deploy'){
 			steps{
-			sh " yum install httpd -y "
+			sh " sudo yum install httpd -y "
              
 			}
 		}
 		stage ('start'){
 				steps{
-					
-				sh "cp -r /mnt/myproject/index.html /var/www/html/index.html "
-					sh "chmod -R 777 /var/www/html/index.html"
-					sh "service httpd start"
+					sh "chmod -R 777 /mnt/myproject/index.html"
+				sh "sudo cp -r /mnt/myproject/index.html /var/www/html/index.html"
+					sh "sudo chmod -R 777 /var/www/html/index.html"
+					sh "sudo service httpd start"
             
 				}
 			}
 }
 }
-Footer
-© 2022 GitHub, Inc.
